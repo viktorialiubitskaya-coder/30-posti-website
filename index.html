@@ -167,24 +167,9 @@ body::before {
 ══════════════════════════════════════════ -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-carta/96 backdrop-blur-sm border-b border-cartad">
   <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-    <!-- Inline logo SVG -->
+    <!-- Logo reale PNG (sfondo trasparente) -->
     <a href="#" aria-label="30 Posti Home">
-      <svg width="56" height="68" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- "3" -->
-        <text x="2" y="78" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="82" fill="#1A1410">3</text>
-        <!-- Bottle as "0" — body -->
-        <rect x="57" y="42" width="28" height="38" rx="5" fill="#1A1410"/>
-        <!-- bottle shoulder -->
-        <path d="M57 42 C55 34 58 26 62 22 L74 22 C78 26 81 34 79 42Z" fill="#1A1410"/>
-        <!-- bottle neck -->
-        <rect x="63" y="12" width="12" height="12" rx="2" fill="#1A1410"/>
-        <!-- cork magenta -->
-        <rect x="62" y="4" width="14" height="10" rx="2.5" fill="#C41E6E"/>
-        <!-- "POSTI" -->
-        <text x="50" y="100" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="20" fill="#1A1410" text-anchor="middle">POSTI</text>
-        <!-- tagline -->
-        <text x="50" y="113" font-family="'Barlow Condensed',sans-serif" font-weight="400" font-size="8" fill="#8A8480" text-anchor="middle">storie di cibo e di vino</text>
-      </svg>
+      <img src="assets/logo.png" alt="30 Posti — Storie di Cibo e di Vino" style="height:62px; width:auto; display:block;"/>
     </a>
     <!-- Desktop nav -->
     <div class="hidden md:flex items-center gap-7">
@@ -820,16 +805,10 @@ body::before {
 ══════════════════════════════════════════ -->
 <footer class="bg-inchiostro border-t border-panna/8 py-8">
   <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
-    <!-- Logo piccolo -->
-    <svg width="42" height="54" viewBox="0 0 100 120" fill="none" opacity="0.55">
-      <text x="2" y="78" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="82" fill="#F5F0E8">3</text>
-      <rect x="57" y="42" width="28" height="38" rx="5" fill="#F5F0E8"/>
-      <path d="M57 42 C55 34 58 26 62 22 L74 22 C78 26 81 34 79 42Z" fill="#F5F0E8"/>
-      <rect x="63" y="12" width="12" height="12" rx="2" fill="#F5F0E8"/>
-      <rect x="62" y="4" width="14" height="10" rx="2.5" fill="#C41E6E"/>
-      <text x="50" y="100" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="20" fill="#F5F0E8" text-anchor="middle">POSTI</text>
-      <text x="50" y="113" font-family="'Barlow Condensed',sans-serif" font-weight="400" font-size="8" fill="#8A8480" text-anchor="middle">storie di cibo e di vino</text>
-    </svg>
+    <!-- Logo piccolo su bg carta (footer scuro → sfondo avorio) -->
+    <div class="bg-carta px-3 py-2 inline-block">
+      <img src="assets/logo.png" alt="30 Posti" style="height:52px; width:auto; display:block;"/>
+    </div>
     <p class="font-mono text-grigio text-xs tracking-wide text-center leading-relaxed">
       30 Posti — Storie di Cibo e di Vino<br>
       Via della Grotta, 13 · Praia a Mare (CS) · Calabria

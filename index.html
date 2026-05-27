@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>30 Posti — Storie di Cibo e di Vino · Praia a Mare</title>
+<meta name="description" content="Wine bar e cucina gourmet. Solo 30 posti, per scelta. Formaggi AOP, salumi d'eccellenza, cantina viva. Via della Grotta 13, Praia a Mare (CS) Calabria."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="30 Posti — Storie di Cibo e di Vino"/>
+<meta property="og:description" content="Solo 30 posti. Per scelta. Wine bar e cucina gourmet a Praia a Mare, Calabria."/>
+<meta name="theme-color" content="#F5F0E8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Pinyon+Script&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        carta:     '#F5F0E8',
+        cartad:    '#EDE5D5',
+        cartal:    '#FAF7F2',
+        inchiostro:'#1A1410',
+        inchlt:    '#4A4540',
+        fucsia:    '#C41E6E',
+        fucsialt:  '#F0C8D8',
+        grigio:    '#8A8480',
+        panna:     '#FAFAF7',
+      },
+      fontFamily: {
+        disp:   ['"Barlow Condensed"','Impact','sans-serif'],
+        script: ['"Pinyon Script"','cursive'],
+        body:   ['Lora','Georgia','serif'],
+        mono:   ['"Courier Prime"','Courier','monospace'],
+      }
+    }
+  }
+}
+</script>
+<style>
+/* ─── Grain texture ─── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  opacity:0.045;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+/* ─── Reveal animations ─── */
+.rev  { opacity:0; transform:translateY(28px); transition:opacity .75s ease, transform .75s ease; }
+.revl { opacity:0; transform:translateX(-28px); transition:opacity .8s ease, transform .8s ease; }
+.revr { opacity:0; transform:translateX(28px); transition:opacity .8s ease, transform .8s ease; }
+.rev.on, .revl.on, .revr.on { opacity:1; transform:none; }
+
+/* ─── Photo filters ─── */
+.foto-warm     { filter:sepia(.14) saturate(1.1) brightness(.95); }
+.foto-hero     { filter:sepia(.22) saturate(.88) brightness(.48) contrast(1.08); }
+
+/* ─── Script heading always fucsia ─── */
+.s-head { font-family:'Pinyon Script',cursive; color:#C41E6E; line-height:1.1; }
+
+/* ─── Nav links ─── */
+.nlink {
+  font-family:'Courier Prime',monospace;
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#4A4540;
+  transition:color .2s;
+  text-decoration:none;
+}
+.nlink:hover { color:#C41E6E; }
+
+/* ─── Tabs ─── */
+.tbtn {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:.82rem;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  padding:.5rem 1.1rem;
+  color:#8A8480;
+  border:none;
+  border-bottom:2px solid transparent;
+  background:none;
+  cursor:pointer;
+  transition:color .2s, border-color .2s;
+  white-space:nowrap;
+}
+.tbtn.on { color:#C41E6E; border-bottom-color:#C41E6E; }
+.tpanel   { display:none; }
+.tpanel.on{ display:block; }
+
+/* ─── Menu items ─── */
+.mi {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+  padding:.9rem 0;
+  border-bottom:1px solid #EDE5D5;
+}
+.mi:last-child { border-bottom:none; }
+.mi-col { flex-direction:column; gap:.2rem; align-items:flex-start; }
+.mi-col .mi-pr { margin-top:.25rem; }
+.mi-name { font-family:'Lora',serif; font-size:1rem; font-weight:700; color:#1A1410; }
+.mi-desc { font-family:'Lora',serif; font-size:.875rem; color:#4A4540; font-style:italic; line-height:1.5; }
+.mi-pr   { font-family:'Courier Prime',monospace; font-size:.88rem; color:#8A8480; white-space:nowrap; flex-shrink:0; }
+.mi-tag  { font-family:'Courier Prime',monospace; font-size:.67rem; color:#C41E6E; letter-spacing:.09em; text-transform:uppercase; display:block; margin-bottom:.15rem; }
+
+/* ─── Cheese / salumi card grid ─── */
+.prod-card { padding:.5rem 0; }
+.prod-card + .prod-card { border-top:1px solid #EDE5D5; }
+
+/* ─── CTA button ─── */
+.btn-fucsia {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:#C41E6E; color:#FAFAF7;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; letter-spacing:.1em; text-transform:uppercase;
+  padding:.875rem 2rem; font-size:1rem;
+  text-decoration:none;
+  transition:background .2s, transform .12s;
+}
+.btn-fucsia:hover { background:#a01558; transform:translateY(-1px); }
+
+/* ─── Map tooltip ─── */
+#map-tip {
+  position:absolute;
+  background:#1A1410; color:#FAFAF7;
+  padding:.75rem 1rem;
+  font-family:'Courier Prime',monospace;
+  font-size:.75rem; line-height:1.6;
+  width:185px;
+  pointer-events:none;
+  display:none;
+  z-index:50;
+}
+.pin-g { cursor:pointer; }
+.pin-g circle { transition:r .18s; }
+.pin-g:hover circle, .pin-g.active circle { r:9; fill:#C41E6E; }
+
+/* ─── Divider ─── */
+.divider { display:flex; align-items:center; gap:1rem; }
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:#EDE5D5; }
+
+/* ─── Gallery strip ─── */
+.gallery-img { width:100%; height:100%; object-fit:cover; display:block; }
+</style>
+</head>
+<body class="bg-carta text-inchiostro font-body overflow-x-hidden">
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-carta/96 backdrop-blur-sm border-b border-cartad">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <!-- Inline logo SVG -->
+    <a href="#" aria-label="30 Posti Home">
+      <svg width="56" height="68" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- "3" -->
+        <text x="2" y="78" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="82" fill="#1A1410">3</text>
+        <!-- Bottle as "0" — body -->
+        <rect x="57" y="42" width="28" height="38" rx="5" fill="#1A1410"/>
+        <!-- bottle shoulder -->
+        <path d="M57 42 C55 34 58 26 62 22 L74 22 C78 26 81 34 79 42Z" fill="#1A1410"/>
+        <!-- bottle neck -->
+        <rect x="63" y="12" width="12" height="12" rx="2" fill="#1A1410"/>
+        <!-- cork magenta -->
+        <rect x="62" y="4" width="14" height="10" rx="2.5" fill="#C41E6E"/>
+        <!-- "POSTI" -->
+        <text x="50" y="100" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="20" fill="#1A1410" text-anchor="middle">POSTI</text>
+        <!-- tagline -->
+        <text x="50" y="113" font-family="'Barlow Condensed',sans-serif" font-weight="400" font-size="8" fill="#8A8480" text-anchor="middle">storie di cibo e di vino</text>
+      </svg>
+    </a>
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#chisiamo" class="nlink">Chi siamo</a>
+      <a href="#cucina"   class="nlink">La Cucina</a>
+      <a href="#cantina"  class="nlink">La Cantina</a>
+      <a href="#birracala" class="nlink">Birra Cala</a>
+      <a href="#prenota"  class="nlink">Prenota</a>
+    </div>
+    <!-- Mobile toggle -->
+    <button id="nav-toggle" class="md:hidden p-2 -mr-2" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#1A1410" stroke-width="1.5" stroke-linecap="round">
+        <line x1="2" y1="6"  x2="20" y2="6"/>
+        <line x1="2" y1="11" x2="20" y2="11"/>
+        <line x1="2" y1="16" x2="20" y2="16"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile drawer -->
+  <div id="nav-drawer" class="hidden md:hidden border-t border-cartad bg-carta px-5 py-5 flex flex-col gap-5">
+    <a href="#chisiamo"  class="nlink" onclick="closeNav()">Chi siamo</a>
+    <a href="#cucina"    class="nlink" onclick="closeNav()">La Cucina</a>
+    <a href="#cantina"   class="nlink" onclick="closeNav()">La Cantina</a>
+    <a href="#birracala" class="nlink" onclick="closeNav()">Birra Cala</a>
+    <a href="#prenota"   class="nlink" onclick="closeNav()">Prenota</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-end overflow-hidden pt-20">
+  <!-- BG photo -->
+  <div class="absolute inset-0">
+    <img src="assets/photos/interno-bruschette.webp" alt="Interno 30 Posti" class="w-full h-full object-cover foto-hero"/>
+  </div>
+  <!-- Gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-inchiostro/92 via-inchiostro/45 to-transparent"></div>
+  <!-- Content -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pb-16 w-full">
+    <p class="s-head mb-3" style="font-size:clamp(2rem,5vw,3.5rem);">Storie di cibo e di vino</p>
+    <h1 class="font-disp font-black uppercase text-panna leading-none" style="font-size:clamp(3rem,7.5vw,6.5rem); letter-spacing:-.01em;">
+      Non è un ristorante.<br>Non è un bar.<br><span class="text-fucsia">È un luogo.</span>
+    </h1>
+    <p class="mt-5 font-body italic text-panna/70 text-xl max-w-md leading-relaxed">
+      Abbiamo solo 30 posti. Per scelta.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4 items-center">
+      <a href="#prenota" class="btn-fucsia">Prenota un posto →</a>
+      <a href="#cucina"  class="nlink text-panna/55 hover:text-panna">Scopri il menu ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHI SIAMO
+══════════════════════════════════════════ -->
+<section id="chisiamo" class="py-24 bg-carta overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16 items-start">
+
+      <!-- Text (3 col) -->
+      <div class="md:col-span-3 revl">
+        <p class="s-head mb-5" style="font-size:clamp(2.8rem,5vw,4.5rem);">Raccontiamo storie</p>
+        <div class="space-y-4 text-inchlt text-lg leading-relaxed">
+          <p>Dietro ogni aperitivo, cena o calice di vino c'è una storia. Non vediamo l'ora di scoprire la tua.</p>
+          <p>Tre cuochi di 25 anni, formati ad <strong class="text-inchiostro font-bold">Alma</strong> — la scuola di alta cucina italiana. Una cucina aperta, un menu che cambia, una ricerca quotidiana sulla materia prima.</p>
+          <p>Formaggi AOP direttamente dai caseifici d'alpe. Salumi con nome, cognome e stagionatura. Gamberi che arrivano da Mazara del Vallo. Carciofi bianchi di Pertosa, presidio Slow Food.</p>
+          <p class="italic">E le zucchine del nonno di Tortora, coltivate in quota nelle montagne di Calabria come si faceva una volta.</p>
+        </div>
+        <p class="mt-8 font-mono text-grigio text-xs tracking-widest uppercase">Via della Grotta, 13 · Praia a Mare (CS) · Calabria</p>
+
+        <!-- Nonno in bicicletta SVG -->
+        <div class="mt-12 opacity-60">
+          <svg width="160" height="110" viewBox="0 0 160 110" fill="none" stroke="#1A1410" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Ruote -->
+            <circle cx="32" cy="78" r="22"/>
+            <circle cx="128" cy="78" r="22"/>
+            <!-- Telaio -->
+            <line x1="32" y1="78" x2="80" y2="42"/>
+            <line x1="80" y1="42" x2="128" y2="78"/>
+            <line x1="80" y1="42" x2="80" y2="65"/>
+            <line x1="80" y1="65" x2="58" y2="78"/>
+            <!-- Manubrio -->
+            <line x1="80" y1="42" x2="100" y2="42"/>
+            <line x1="100" y1="38" x2="104" y2="44"/>
+            <!-- Sellino -->
+            <line x1="72" y1="43" x2="88" y2="43"/>
+            <!-- Pedali (semplificati) -->
+            <line x1="80" y1="65" x2="74" y2="72"/>
+            <line x1="80" y1="65" x2="86" y2="58"/>
+            <!-- Cestino davanti -->
+            <rect x="18" y="56" width="16" height="14" rx="2"/>
+            <!-- Cosa nel cestino -->
+            <line x1="22" y1="56" x2="21" y2="50"/>
+            <line x1="29" y1="56" x2="30" y2="51"/>
+            <ellipse cx="25" cy="49" rx="5" ry="2.5"/>
+            <!-- Nonno: testa -->
+            <circle cx="110" cy="22" r="9"/>
+            <!-- corpo -->
+            <line x1="110" y1="31" x2="108" y2="52"/>
+            <!-- gambe -->
+            <line x1="108" y1="52" x2="96"  y2="66"/>
+            <line x1="108" y1="52" x2="116" y2="60"/>
+            <!-- braccio manubrio -->
+            <line x1="110" y1="38" x2="102" y2="42"/>
+            <!-- cappello -->
+            <ellipse cx="110" cy="14" rx="12" ry="4"/>
+            <rect x="102" y="10" width="16" height="7" rx="3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Photo col (2 col) -->
+      <div class="md:col-span-2 revr relative mt-6 md:mt-0">
+        <!-- Main photo -->
+        <div class="relative">
+          <img src="assets/photos/tartare-parmigiano.webp" alt="Tartare di carne con Parmigiano" class="w-full object-cover foto-warm" style="aspect-ratio:3/4; max-height:520px;"/>
+          <!-- Floating quote -->
+          <div class="absolute -bottom-5 -left-5 bg-fucsia text-panna px-4 py-3 shadow-lg max-w-xs">
+            <p class="font-body italic text-sm leading-snug">"Accomodatevi.<br>La vostra storia comincia da qui."</p>
+          </div>
+        </div>
+        <!-- Chef SVG illustration -->
+        <div class="mt-16 flex justify-end pr-2 opacity-55">
+          <svg width="90" height="120" viewBox="0 0 90 120" fill="none" stroke="#1A1410" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Cappello da chef -->
+            <ellipse cx="45" cy="18" rx="18" ry="6"/>
+            <rect x="32" y="10" width="26" height="18" rx="4"/>
+            <rect x="28" y="26" width="34" height="5" rx="2"/>
+            <!-- Testa -->
+            <circle cx="45" cy="42" r="10"/>
+            <!-- Corpo / giacca -->
+            <path d="M35 52 Q28 58 30 80 L60 80 Q62 58 55 52Z"/>
+            <!-- Bottoni giacca -->
+            <circle cx="45" cy="60" r="1.5" fill="#1A1410" stroke="none"/>
+            <circle cx="45" cy="67" r="1.5" fill="#1A1410" stroke="none"/>
+            <circle cx="45" cy="74" r="1.5" fill="#1A1410" stroke="none"/>
+            <!-- Braccia -->
+            <line x1="30" y1="57" x2="16" y2="72"/>
+            <line x1="60" y1="57" x2="74" y2="65"/>
+            <!-- Piatto con cupola -->
+            <ellipse cx="74" cy="68" rx="16" ry="5"/>
+            <path d="M58 68 Q58 56 74 56 Q90 56 90 68"/>
+            <!-- Gambe -->
+            <line x1="38" y1="80" x2="36" y2="105"/>
+            <line x1="52" y1="80" x2="54" y2="105"/>
+            <!-- Scarpe -->
+            <line x1="34" y1="105" x2="42" y2="105"/>
+            <line x1="52" y1="105" x2="60" y2="105"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MATERIA PRIMA
+══════════════════════════════════════════ -->
+<section class="py-20 bg-cartad">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 rev">
+      <p class="s-head" style="font-size:clamp(2.6rem,4.5vw,4rem);">La materia prima racconta</p>
+      <p class="font-mono text-grigio text-xs tracking-widest uppercase mt-3">Nazionale · Internazionale · Dal nonno di Tortora</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+      <!-- Formaggi -->
+      <div class="rev" style="transition-delay:.08s">
+        <div class="border-t-2 border-fucsia pt-5">
+          <p class="font-disp font-black text-2xl uppercase tracking-wide mb-5">Formaggi AOP &amp; DOP</p>
+          <ul class="space-y-3.5">
+            <li class="prod-card"><span class="mi-tag">Francia · Haute-Savoie</span><span class="font-body font-bold">Beaufort d'alpage AOP</span> <em class="text-inchlt text-sm"> · 18 mesi</em></li>
+            <li class="prod-card"><span class="mi-tag">Francia · Jura</span><span class="font-body font-bold">Comté d'alpage AOP</span> <em class="text-inchlt text-sm"> · 30 mesi</em></li>
+            <li class="prod-card"><span class="mi-tag">Svizzera · Pays-d'Enhaut</span><span class="font-body font-bold">L'Étivaz AOP</span> <em class="text-inchlt text-sm"> · solo estate, alpeggio</em></li>
+            <li class="prod-card"><span class="mi-tag">Svizzera · Fribourg</span><span class="font-body font-bold">Gruyère de cave AOP</span></li>
+            <li class="prod-card"><span class="mi-tag">Francia · Normandia</span><span class="font-body font-bold">Coeur de Neufchâtel AOP</span></li>
+            <li class="prod-card"><span class="mi-tag">Inghilterra</span><span class="font-body font-bold">Blue Stilton DOP</span></li>
+            <li class="prod-card"><span class="mi-tag">Olanda</span><span class="font-body font-bold">Reypenaer VSOP</span> <em class="text-inchlt text-sm"> · 24 mesi</em></li>
+            <li class="prod-card"><span class="mi-tag">Baleari · Spagna</span><span class="font-body font-bold">Mahón-Menorca DOP</span></li>
+            <li class="prod-card"><span class="mi-tag">Galizia · Spagna</span><span class="font-body font-bold">San Simón da Costa DOP</span> <em class="text-inchlt text-sm"> · affumicato</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Salumi -->
+      <div class="rev" style="transition-delay:.16s">
+        <div class="border-t-2 border-fucsia pt-5">
+          <p class="font-disp font-black text-2xl uppercase tracking-wide mb-5">Salumi d'eccellenza</p>
+          <ul class="space-y-3.5">
+            <li class="prod-card"><span class="mi-tag">Parma · Nebbia padana</span><span class="font-body font-bold">Culatello Terre di Nebbia</span></li>
+            <li class="prod-card"><span class="mi-tag">Spagna · Jabugo · 48 mesi</span><span class="font-body font-bold">Jamón Pata Negra Joselito Gran Reserva</span></li>
+            <li class="prod-card"><span class="mi-tag">Spagna · 30 mesi</span><span class="font-body font-bold">Jamón de Teruel DOP</span></li>
+            <li class="prod-card"><span class="mi-tag">Piacenza</span><span class="font-body font-bold">Spalla cruda di Palasone</span></li>
+            <li class="prod-card"><span class="mi-tag">Calabria</span><span class="font-body font-bold">Patacotto</span></li>
+            <li class="prod-card"><span class="mi-tag">Spagna · Bellota 100%</span><span class="font-body font-bold">Lardo di Pata Negra</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Parmigiano + Nonno -->
+      <div class="rev" style="transition-delay:.24s">
+        <div class="border-t-2 border-fucsia pt-5">
+          <p class="font-disp font-black text-2xl uppercase tracking-wide mb-3">Il Parmigiano</p>
+          <p class="font-body text-inchlt text-sm leading-relaxed mb-4">Caseificio San Simone 1902. Ogni anno di stagionatura è una storia in più — fino a 100 mesi.</p>
+          <div class="flex flex-wrap gap-2 mb-1">
+            <span class="font-mono text-xs border border-cartad px-2 py-1 bg-carta">36 mesi</span>
+            <span class="font-mono text-xs border border-cartad px-2 py-1 bg-carta">48 mesi</span>
+            <span class="font-mono text-xs border border-cartad px-2 py-1 bg-carta">60 mesi</span>
+            <span class="font-mono text-xs border border-cartad px-2 py-1 bg-carta">72 mesi</span>
+            <span class="font-mono text-xs border border-fucsia text-fucsia px-2 py-1">100 mesi ✦</span>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-cartad">
+            <p class="font-disp font-black text-2xl uppercase tracking-wide mb-3">Dal nonno di Tortora</p>
+            <p class="font-body text-inchlt text-sm italic leading-relaxed">Zucchine, pomodori, peperoni, erbe aromatiche. Coltivati in quota nelle montagne di Tortora, come si faceva una volta. Chilometro zero non per moda — per famiglia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grape divider -->
+    <div class="divider mt-16 opacity-40">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#1A1410" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+        <circle cx="13" cy="19" r="4.5"/>
+        <circle cx="25" cy="19" r="4.5"/>
+        <circle cx="19" cy="11" r="4.5"/>
+        <circle cx="19" cy="27" r="4.5"/>
+        <circle cx="13" cy="11" r="3"/>
+        <circle cx="25" cy="11" r="3"/>
+        <path d="M19 6.5 Q23 3 27 5"/>
+        <path d="M27 5 Q29 2 31 4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MENU
+══════════════════════════════════════════ -->
+<section id="cucina" class="py-24 bg-carta">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-10 rev">
+      <p class="s-head" style="font-size:clamp(2.6rem,4.5vw,4rem);">Il menù</p>
+      <p class="font-mono text-grigio text-xs tracking-widest uppercase mt-3">Coperto €3,00 · Focaccia calda + olio EVO + sale Maldon per tutta la durata del pasto</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="border-b border-cartad flex overflow-x-auto mb-8 -mx-2 px-2">
+      <button class="tbtn on" onclick="setTab(event,'guliji')">Gulìjì</button>
+      <button class="tbtn"    onclick="setTab(event,'formaggi')">Formaggi</button>
+      <button class="tbtn"    onclick="setTab(event,'salumi')">Salumi</button>
+      <button class="tbtn"    onclick="setTab(event,'piatti')">Piatti</button>
+      <button class="tbtn"    onclick="setTab(event,'dolci')">Dolci</button>
+      <button class="tbtn"    onclick="setTab(event,'cala')">Birra Cala</button>
+      <button class="tbtn"    onclick="setTab(event,'bevande')">Bevande</button>
+    </div>
+
+    <!-- ─ GULIJI ─ -->
+    <div id="tp-guliji" class="tpanel on">
+      <p class="font-body italic text-inchlt text-sm mb-6">Apertura di serata. Piccoli assaggi per iniziare a raccontare.</p>
+      <div class="mi"><div><p class="mi-name">Zafarane Ridde</p><p class="mi-desc">Peperoni cruschi di Senise IGP</p></div><span class="mi-pr">€7,00 <small class="text-xs text-grigio">/porz.</small></span></div>
+      <div class="mi"><div><p class="mi-name">Fichi neri caramellati artigianali</p></div><span class="mi-pr">€3,50 <small class="text-xs text-grigio">/pz</small></span></div>
+      <div class="mi"><div><p class="mi-name">Peperoncini ripieni di tonno della Cantabria</p></div><span class="mi-pr">€6,00 <small class="text-xs text-grigio">/porz.</small></span></div>
+      <div class="mi"><div><p class="mi-name">Giardiniera homemade</p></div><span class="mi-pr">€12,00 <small class="text-xs text-grigio">/porz.</small></span></div>
+    </div>
+
+    <!-- ─ FORMAGGI ─ -->
+    <div id="tp-formaggi" class="tpanel">
+      <p class="font-body italic text-inchlt text-sm mb-6">Piatti degustazione per 2 persone, con confetture e accompagnamenti selezionati.</p>
+
+      <div class="border border-cartad bg-cartad/30 p-5 mb-4">
+        <div class="flex justify-between items-baseline mb-1">
+          <p class="font-disp font-black text-xl uppercase tracking-wide">Formaggi Francesi AOP</p>
+          <span class="mi-pr">€30,00 <small class="text-xs text-grigio">x2</small></span>
+        </div>
+        <p class="font-mono text-grigio text-xs mb-4 tracking-wide">Con confettura di mirtilli &amp; spezie</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div><span class="mi-tag">Normandia</span><p class="font-body font-bold text-sm">Coeur de Neufchâtel AOP</p></div>
+          <div><span class="mi-tag">Auvergne</span><p class="font-body font-bold text-sm">Fourme d'Ambert AOP</p><p class="font-body italic text-xs text-inchlt">erborinato pennicillum roqueforti</p></div>
+          <div><span class="mi-tag">Nord Francia</span><p class="font-body font-bold text-sm">Mimolette AOC <span class="font-normal">12 mesi</span></p></div>
+          <div><span class="mi-tag">Haute-Savoie</span><p class="font-body font-bold text-sm">Beaufort AOP d'alpage <span class="font-normal">18 mesi</span></p></div>
+          <div><span class="mi-tag">Jura</span><p class="font-body font-bold text-sm">Comté AOP d'alpage <span class="font-normal">30 mesi</span></p></div>
+          <div><span class="mi-tag">Savoie</span><p class="font-body font-bold text-sm">Tomme de Tarentaise IGP <span class="font-normal">12 mesi</span></p></div>
+          <div><span class="mi-tag">Auvergne</span><p class="font-body font-bold text-sm">Cantal AOP Vieux</p></div>
+        </div>
+      </div>
+
+      <div class="border border-cartad bg-cartad/30 p-5 mb-4">
+        <div class="flex justify-between items-baseline mb-1">
+          <p class="font-disp font-black text-xl uppercase tracking-wide">Formaggi Europei</p>
+          <span class="mi-pr">€30,00 <small class="text-xs text-grigio">x2</small></span>
+        </div>
+        <p class="font-mono text-grigio text-xs mb-4 tracking-wide">Con confettura di fichi &amp; miele</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div><span class="mi-tag">Svizzera · Berna</span><p class="font-body font-bold text-sm">Tête de Moine AOC</p></div>
+          <div><span class="mi-tag">Inghilterra</span><p class="font-body font-bold text-sm">Blue Stilton DOP</p></div>
+          <div><span class="mi-tag">Olanda</span><p class="font-body font-bold text-sm">Reypenaer VSOP <span class="font-normal">24 mesi</span></p></div>
+          <div><span class="mi-tag">Baleari · Spagna</span><p class="font-body font-bold text-sm">Mahón-Menorca DOP</p></div>
+          <div><span class="mi-tag">Galizia · Spagna</span><p class="font-body font-bold text-sm">San Simón da Costa DOP</p><p class="font-body italic text-xs text-inchlt">affumicato</p></div>
+          <div><span class="mi-tag">Svizzera · Fribourg</span><p class="font-body font-bold text-sm">Gruyère de cave AOP</p></div>
+          <div><span class="mi-tag">Svizzera · Pays-d'Enhaut</span><p class="font-body font-bold text-sm">L'Étivaz AOP</p><p class="font-body italic text-xs text-inchlt">solo estate, latte d'alpeggio</p></div>
+        </div>
+      </div>
+
+      <div class="border border-fucsia/25 bg-fucsia/5 p-5">
+        <div class="flex justify-between items-baseline mb-1">
+          <p class="font-disp font-black text-xl uppercase tracking-wide">Il Parmigiano</p>
+          <span class="mi-pr">€20,00 <small class="text-xs text-grigio">x2</small></span>
+        </div>
+        <p class="font-mono text-grigio text-xs mb-4 tracking-wide">Caseificio San Simone 1902 · Miele mille fiori di montagna</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="font-mono text-xs border border-cartad bg-carta px-2 py-1">36 mesi</span>
+          <span class="font-mono text-xs border border-cartad bg-carta px-2 py-1">48 mesi</span>
+          <span class="font-mono text-xs border border-cartad bg-carta px-2 py-1">60 mesi</span>
+          <span class="font-mono text-xs border border-cartad bg-carta px-2 py-1">72 mesi</span>
+          <span class="font-mono text-xs border border-fucsia text-fucsia px-2 py-1">100 mesi ✦</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ SALUMI ─ -->
+    <div id="tp-salumi" class="tpanel">
+      <p class="font-body italic text-inchlt text-sm mb-6">Porzione 140g circa. Serviti con focaccia calda e mostarda artigianale.</p>
+      <div class="mi"><div><p class="mi-name">Culatello Terre di Nebbia</p><p class="mi-desc">Parma · Nebbia padana</p></div><span class="mi-pr">€20,00</span></div>
+      <div class="mi"><div><p class="mi-name">Spalla cruda di Palasone</p><p class="mi-desc">Piacenza</p></div><span class="mi-pr">€18,00</span></div>
+      <div class="mi"><div><p class="mi-name">Patacotto</p><p class="mi-desc">Calabria</p></div><span class="mi-pr">€14,00</span></div>
+      <div class="mi"><div><p class="mi-name">Jamón de Teruel DOP</p><p class="mi-desc">Spagna · 30 mesi</p></div><span class="mi-pr">€18,00</span></div>
+      <div class="mi bg-fucsia/5 px-3 -mx-3"><div><p class="mi-name">Jamón Pata Negra Joselito Gran Reserva</p><p class="mi-desc">Jabugo · Bellota · 48 mesi</p></div><span class="mi-pr text-fucsia">€44,00</span></div>
+      <div class="mi"><div><p class="mi-name">Lardo di Pata Negra 100% de Bellota</p><p class="mi-desc">Spagna</p></div><span class="mi-pr">€12,00</span></div>
+    </div>
+
+    <!-- ─ PIATTI ─ -->
+    <div id="tp-piatti" class="tpanel">
+      <p class="font-body italic text-inchlt text-sm mb-6">Cucinati con amore.</p>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Cappello del prete brasato al Sangiovese</p><span class="mi-pr">€28,00</span></div>
+        <p class="mi-desc">Purea di patate Sila IGP alla Robuchon</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Gamberi rossi di Mazara del Vallo</p><span class="mi-pr">€35,00</span></div>
+        <p class="mi-desc">Lardo Pata Negra 100% de Bellota · carciofi bianchi di Pertosa (presidio Slow Food) · focaccia al tartufo nero e nocciole</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Magatello in salsa tonnata</p><span class="mi-pr">€32,00</span></div>
+        <p class="mi-desc">Fondo bruno · spinacini al burro della Normandia · Parmigiano Reggiano 100 mesi · piada romagnola</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Battuta di Vitellone Bianco dell'Appennino centrale IGP</p><span class="mi-pr">€34,00</span></div>
+        <p class="mi-desc">Tuorlo marinato · asparagi · formaggio di fossa di Sogliano DOP · focaccia al tartufo nero e nocciole</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Toast: Patacotto e Comté d'alpeggio</p><span class="mi-pr">€24,00</span></div>
+        <p class="mi-desc">Comté d'alpeggio 30 mesi · zucchine alla scapece · mayonnaise alla senape antica di Dijon</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Filetti di alici croccanti</p><span class="mi-pr">€16,00</span></div>
+        <p class="mi-desc">Mayonnaise alla 'Nduja di suino nero di Calabria</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Ovetto di montagna</p><span class="mi-pr">€18,00</span></div>
+        <p class="mi-desc">Purea di piselli · fonduta di Roquefort · peperone crusco di Senise IGP</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Pan Brioche</p><span class="mi-pr">€16,00</span></div>
+        <p class="mi-desc">Lardo Pata Negra 100% de Bellota · purea di cipolla rossa di Tropea IGP · insalatina di fave · acciughe del mar Cantabrico Serie Oro "Codesa"</p>
+      </div>
+    </div>
+
+    <!-- ─ DOLCI ─ -->
+    <div id="tp-dolci" class="tpanel">
+      <p class="font-body italic text-inchlt text-sm mb-6">Il nostro concetto di dolce.</p>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Pan Brioche ai 3 cioccolati</p><span class="mi-pr">€6,00</span></div>
+        <p class="mi-desc">Mousse al mascarpone e cacao</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Cheesecake Enotria</p><span class="mi-pr">€6,00</span></div>
+        <p class="mi-desc">Biscotto al cacao · mousse al formaggio · nocciole delle Langhe IGP · peperone crusco di Senise IGP</p>
+      </div>
+      <div class="mi mi-col">
+        <div class="flex justify-between w-full items-baseline"><p class="mi-name">Cantucci alle mandorle</p><span class="mi-pr">€8,00</span></div>
+        <p class="mi-desc">Con calice di Passito Fabula IGP "Gioia al Negro"</p>
+      </div>
+      <p class="font-mono text-grigio text-xs mt-6 tracking-wide leading-relaxed">Gli amari e digestivi variano in base alla selezione del mese — richiedili al personale o consulta la lavagnetta.</p>
+    </div>
+
+    <!-- ─ BIRRA CALA TAB ─ -->
+    <div id="tp-cala" class="tpanel">
+      <p class="font-body italic text-inchlt text-sm mb-6">Italian Grape Ale artigianali sui vitigni calabresi. 0,33cl · €9,00 cad.</p>
+      <div class="mi"><div><p class="mi-name">Casa Comerci "Magliocco canino"</p><p class="mi-desc">Tenuta di Vibo Valentia</p></div><span class="mi-pr">€9,00</span></div>
+      <div class="mi"><div><p class="mi-name">Librandi "Gaglioppo"</p><p class="mi-desc">Tenuta di Crotone</p></div><span class="mi-pr">€9,00</span></div>
+      <div class="mi"><div><p class="mi-name">Antonella Lombardo "Greco Bianco"</p><p class="mi-desc">Tenuta di Reggio Calabria</p></div><span class="mi-pr">€9,00</span></div>
+      <div class="mi"><div><p class="mi-name">Statti "Greco nero"</p><p class="mi-desc">Tenuta di Catanzaro</p></div><span class="mi-pr">€9,00</span></div>
+      <div class="mi"><div><p class="mi-name">Spadafora "Pecorello"</p><p class="mi-desc">Tenuta di Cosenza</p></div><span class="mi-pr">€9,00</span></div>
+    </div>
+
+    <!-- ─ BEVANDE ─ -->
+    <div id="tp-bevande" class="tpanel">
+      <div class="mi"><p class="mi-name">Acqua Panna 0,75cl naturale</p><span class="mi-pr">€3,00</span></div>
+      <div class="mi"><p class="mi-name">Acqua San Pellegrino 0,75cl</p><span class="mi-pr">€3,00</span></div>
+      <div class="mi"><p class="mi-name">Coca Cola 0,33cl</p><span class="mi-pr">€3,00</span></div>
+      <div class="mi"><p class="mi-name">Coca Cola Zero 0,33cl</p><span class="mi-pr">€3,00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GALLERY STRIP
+══════════════════════════════════════════ -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-cartad">
+  <div class="overflow-hidden" style="height:220px;"><img src="assets/photos/burger-calice.webp" alt="Calice di bianco e burger gourmet" class="gallery-img foto-warm"/></div>
+  <div class="overflow-hidden" style="height:220px;"><img src="assets/photos/dessert-cioccolato.webp" alt="Dessert cioccolato" class="gallery-img foto-warm"/></div>
+  <div class="overflow-hidden" style="height:220px;"><img src="assets/photos/tartare-rosmarino.webp" alt="Tartare con rosmarino" class="gallery-img foto-warm"/></div>
+  <div class="overflow-hidden" style="height:220px;"><img src="assets/photos/gamberi-rossi.webp" alt="Gamberi rossi" class="gallery-img foto-warm"/></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CANTINA
+══════════════════════════════════════════ -->
+<section id="cantina" class="py-24 bg-carta">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <!-- Text -->
+      <div class="revl">
+        <p class="s-head mb-5" style="font-size:clamp(2.5rem,4.5vw,3.8rem);">Una cantina viva</p>
+        <div class="space-y-4 text-inchlt text-lg leading-relaxed">
+          <p>Oltre 100 etichette. Sfogliala come se fossi a casa.</p>
+          <p>La nostra cantina non è un catalogo — è un racconto in movimento. Ogni settimana entra qualcosa di nuovo, qualcosa esce. Le bottiglie sono disposte liberamente: i clienti possono sfogliarle, leggere le etichette, chiedere di stapparne una.</p>
+          <p>Bianchi naturali, rossi di vigna, bollicine inaspettate. Con un'attenzione particolare alle <strong class="text-inchiostro">5 cantine calabresi</strong> partner di Birra Cala — perché la Calabria ha vini che meritano di essere raccontati.</p>
+        </div>
+        <p class="mt-6 font-mono text-grigio text-xs tracking-widest uppercase">Vini al calice disponibili ogni sera · Carta in continuo aggiornamento</p>
+
+        <!-- Mano calice SVG -->
+        <div class="mt-12 opacity-55">
+          <svg width="100" height="140" viewBox="0 0 100 140" fill="none" stroke="#1A1410" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Calice: coppa -->
+            <path d="M30 20 Q24 50 38 70 L62 70 Q76 50 70 20 Z"/>
+            <!-- Gambo -->
+            <line x1="50" y1="70" x2="50" y2="108"/>
+            <!-- Base -->
+            <ellipse cx="50" cy="110" rx="22" ry="5"/>
+            <!-- Vino dentro -->
+            <path d="M33 52 Q30 62 38 70 L62 70 Q70 62 67 52Z" fill="#C41E6E" fill-opacity=".18" stroke="none"/>
+            <!-- Mano che regge il gambo -->
+            <path d="M38 88 Q32 90 30 98 Q28 106 34 110 Q40 112 46 108"/>
+            <!-- Dita -->
+            <path d="M34 92 Q26 88 24 82 Q23 78 27 77 Q31 76 32 80"/>
+            <path d="M30 98 Q22 96 21 90 Q20 85 24 84 Q28 83 29 88"/>
+            <path d="M36 104 Q28 104 27 98 Q26 94 30 93 Q34 92 35 97"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Photo -->
+      <div class="revr">
+        <div class="relative">
+          <img src="assets/photos/burger-calice.webp" alt="Calice di bianco" class="w-full object-cover foto-warm" style="aspect-ratio:4/5; max-height:560px;"/>
+          <!-- Bottle illustration -->
+          <div class="absolute -bottom-6 -right-6 opacity-50">
+            <svg width="70" height="130" viewBox="0 0 70 130" fill="none" stroke="#1A1410" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+              <!-- corpo bottiglia -->
+              <rect x="18" y="58" width="34" height="60" rx="6"/>
+              <!-- spalle -->
+              <path d="M18 58 C14 46 18 34 22 28 L48 28 C52 34 56 46 52 58Z"/>
+              <!-- collo -->
+              <rect x="24" y="16" width="22" height="14" rx="3"/>
+              <!-- etichetta -->
+              <rect x="20" y="68" width="30" height="40" rx="2"/>
+              <line x1="25" y1="76" x2="45" y2="76"/>
+              <line x1="23" y1="82" x2="47" y2="82"/>
+              <line x1="25" y1="88" x2="45" y2="88"/>
+              <line x1="28" y1="94" x2="42" y2="94"/>
+              <!-- tappo -->
+              <rect x="26" y="8" width="18" height="10" rx="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     BIRRA CALA
+══════════════════════════════════════════ -->
+<section id="birracala" class="py-24 bg-cartad">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 rev">
+      <p class="font-mono text-grigio text-xs tracking-widest uppercase mb-3">Birra Cala · IGA · Italian Grape Ale</p>
+      <p class="s-head" style="font-size:clamp(2.4rem,4.5vw,3.8rem);">Birra artigianale<br>sui vitigni di Calabria</p>
+      <p class="mt-5 font-body italic text-inchlt text-lg max-w-lg mx-auto leading-relaxed">"Cinque cantine, cinque vitigni, un'idea: la Calabria nel bicchiere."</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+      <!-- Text + lista cantine -->
+      <div class="rev space-y-5">
+        <p class="font-body text-inchlt leading-relaxed text-lg">Un progetto unico in Calabria: birre IGA prodotte con mosto di vitigni autoctoni, in partnership con cinque cantine d'eccellenza della regione. Ogni birra porta il nome del vitigno, la firma della cantina, l'anima del territorio.</p>
+        <p class="font-body text-inchlt leading-relaxed">Servite a 30 Posti in bottiglia da 0,33cl — <strong class="text-inchiostro">€9,00</strong> cad.</p>
+
+        <div class="space-y-2 mt-4">
+          <div class="flex gap-4 items-center p-4 bg-carta border-l-2 border-fucsia">
+            <span class="font-disp font-black text-2xl text-fucsia w-7 flex-shrink-0">①</span>
+            <div><p class="font-disp font-black text-lg uppercase leading-none">Casa Comerci</p><p class="font-mono text-xs text-grigio mt-1">Vibo Valentia · Magliocco canino</p></div>
+          </div>
+          <div class="flex gap-4 items-center p-4 bg-carta border-l-2 border-fucsia">
+            <span class="font-disp font-black text-2xl text-fucsia w-7 flex-shrink-0">②</span>
+            <div><p class="font-disp font-black text-lg uppercase leading-none">Librandi</p><p class="font-mono text-xs text-grigio mt-1">Crotone · Gaglioppo</p></div>
+          </div>
+          <div class="flex gap-4 items-center p-4 bg-carta border-l-2 border-fucsia">
+            <span class="font-disp font-black text-2xl text-fucsia w-7 flex-shrink-0">③</span>
+            <div><p class="font-disp font-black text-lg uppercase leading-none">Antonella Lombardo</p><p class="font-mono text-xs text-grigio mt-1">Reggio Calabria · Greco Bianco</p></div>
+          </div>
+          <div class="flex gap-4 items-center p-4 bg-carta border-l-2 border-fucsia">
+            <span class="font-disp font-black text-2xl text-fucsia w-7 flex-shrink-0">④</span>
+            <div><p class="font-disp font-black text-lg uppercase leading-none">Statti</p><p class="font-mono text-xs text-grigio mt-1">Catanzaro · Greco nero</p></div>
+          </div>
+          <div class="flex gap-4 items-center p-4 bg-carta border-l-2 border-fucsia">
+            <span class="font-disp font-black text-2xl text-fucsia w-7 flex-shrink-0">⑤</span>
+            <div><p class="font-disp font-black text-lg uppercase leading-none">Spadafora</p><p class="font-mono text-xs text-grigio mt-1">Cosenza · Pecorello</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calabria SVG Map -->
+      <div class="revr flex justify-center">
+        <div class="relative" style="width:260px; height:400px;">
+          <!-- Tooltip -->
+          <div id="map-tip">
+            <p id="tip-c" class="font-disp font-black text-base uppercase" style="color:#C41E6E;"></p>
+            <p id="tip-p" class="opacity-65 mt-1"></p>
+            <p id="tip-v" class="italic mt-1"></p>
+          </div>
+          <svg viewBox="0 0 260 400" width="260" height="400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Calabria silhouette (simplified peninsula) -->
+            <path d="
+              M 95 18
+              C 110 15 128 20 138 32
+              C 150 46 154 64 152 82
+              C 150 98 145 114 142 130
+              C 138 148 135 164 132 180
+              C 129 196 126 210 120 222
+              C 114 234 106 244 98 254
+              C 90 264 82 274 76 286
+              C 70 298 66 312 64 326
+              C 62 340 63 354 68 364
+              C 73 374 82 380 90 380
+              C 100 380 110 373 116 362
+              C 122 350 126 334 128 318
+              C 130 304 132 290 137 278
+              C 143 264 152 252 161 242
+              C 170 232 180 222 186 210
+              C 193 196 194 180 190 166
+              C 186 152 178 140 170 130
+              C 162 118 155 108 148 96
+              C 140 82 132 68 122 52
+              C 112 36 100 22 95 18Z
+            " fill="#E8E0D0" stroke="#1A1410" stroke-width="1.6"/>
+            <!-- Toe of boot -->
+            <path d="M 78 378 C 70 388 65 396 70 400 C 76 402 86 396 92 388" stroke="#1A1410" stroke-width="1.6" fill="none"/>
+
+            <!-- ① Vibo Valentia — west coast, lower -->
+            <g class="pin-g" data-c="Casa Comerci" data-p="Vibo Valentia" data-v="Magliocco canino">
+              <circle cx="80"  cy="290" r="7" fill="#F5F0E8" stroke="#C41E6E" stroke-width="2"/>
+              <text x="80"  y="294" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="8" fill="#C41E6E" text-anchor="middle">①</text>
+            </g>
+            <!-- ② Crotone — east coast, upper -->
+            <g class="pin-g" data-c="Librandi" data-p="Crotone" data-v="Gaglioppo">
+              <circle cx="175" cy="148" r="7" fill="#F5F0E8" stroke="#C41E6E" stroke-width="2"/>
+              <text x="175" y="152" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="8" fill="#C41E6E" text-anchor="middle">②</text>
+            </g>
+            <!-- ③ Reggio Calabria — south tip -->
+            <g class="pin-g" data-c="Antonella Lombardo" data-p="Reggio Calabria" data-v="Greco Bianco">
+              <circle cx="82"  cy="358" r="7" fill="#F5F0E8" stroke="#C41E6E" stroke-width="2"/>
+              <text x="82"  y="362" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="8" fill="#C41E6E" text-anchor="middle">③</text>
+            </g>
+            <!-- ④ Catanzaro — center waist -->
+            <g class="pin-g" data-c="Statti" data-p="Catanzaro" data-v="Greco nero">
+              <circle cx="140" cy="210" r="7" fill="#F5F0E8" stroke="#C41E6E" stroke-width="2"/>
+              <text x="140" y="214" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="8" fill="#C41E6E" text-anchor="middle">④</text>
+            </g>
+            <!-- ⑤ Cosenza — north -->
+            <g class="pin-g" data-c="Spadafora" data-p="Cosenza" data-v="Pecorello">
+              <circle cx="125" cy="82" r="7" fill="#F5F0E8" stroke="#C41E6E" stroke-width="2"/>
+              <text x="125" y="86" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="8" fill="#C41E6E" text-anchor="middle">⑤</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRENOTA
+══════════════════════════════════════════ -->
+<section id="prenota" class="py-28 bg-inchiostro">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <p class="s-head" style="font-size:clamp(2.8rem,6vw,5.5rem); color:#C41E6E;">La vostra storia<br>comincia da qui</p>
+    <p class="mt-6 font-body italic text-panna/65 text-xl leading-relaxed max-w-lg mx-auto">
+      Prenotare è semplice — scrivici su Instagram e ti confermiamo il posto in pochi minuti.
+    </p>
+    <a href="https://instagram.com/30posti.official" target="_blank" rel="noopener" class="btn-fucsia mt-10 text-lg px-8 py-4">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Scrivi su @30posti.official
+    </a>
+
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+      <div>
+        <p class="font-mono text-grigio text-xs tracking-widest uppercase mb-3">Dove siamo</p>
+        <p class="font-disp font-black text-xl uppercase text-panna">Via della Grotta, 13</p>
+        <p class="font-body text-panna/65 mt-1">87028 Praia a Mare (CS)<br>Calabria, Italia</p>
+      </div>
+      <div>
+        <p class="font-mono text-grigio text-xs tracking-widest uppercase mb-3">Quando</p>
+        <p class="font-disp font-black text-xl uppercase text-panna">Mar – Dom</p>
+        <p class="font-body text-panna/65 mt-1">18:00 – fino a tardi</p>
+        <p class="font-mono text-xs text-grigio mt-2 leading-relaxed">Pranzo solo su prenotazione<br>Lunedì chiuso</p>
+      </div>
+      <div>
+        <p class="font-mono text-grigio text-xs tracking-widest uppercase mb-3">Seguici</p>
+        <a href="https://instagram.com/30posti.official" target="_blank" rel="noopener" class="font-disp font-black text-xl uppercase text-fucsia hover:opacity-80 transition-opacity">@30posti.official</a>
+        <p class="font-body text-panna/45 text-sm mt-2 italic leading-relaxed">Il nostro Instagram è la nostra voce quotidiana. Prenotazioni, storie, novità dalla cantina.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="bg-inchiostro border-t border-panna/8 py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
+    <!-- Logo piccolo -->
+    <svg width="42" height="54" viewBox="0 0 100 120" fill="none" opacity="0.55">
+      <text x="2" y="78" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="82" fill="#F5F0E8">3</text>
+      <rect x="57" y="42" width="28" height="38" rx="5" fill="#F5F0E8"/>
+      <path d="M57 42 C55 34 58 26 62 22 L74 22 C78 26 81 34 79 42Z" fill="#F5F0E8"/>
+      <rect x="63" y="12" width="12" height="12" rx="2" fill="#F5F0E8"/>
+      <rect x="62" y="4" width="14" height="10" rx="2.5" fill="#C41E6E"/>
+      <text x="50" y="100" font-family="'Barlow Condensed',Impact,sans-serif" font-weight="900" font-size="20" fill="#F5F0E8" text-anchor="middle">POSTI</text>
+      <text x="50" y="113" font-family="'Barlow Condensed',sans-serif" font-weight="400" font-size="8" fill="#8A8480" text-anchor="middle">storie di cibo e di vino</text>
+    </svg>
+    <p class="font-mono text-grigio text-xs tracking-wide text-center leading-relaxed">
+      30 Posti — Storie di Cibo e di Vino<br>
+      Via della Grotta, 13 · Praia a Mare (CS) · Calabria
+    </p>
+    <a href="https://instagram.com/30posti.official" target="_blank" rel="noopener" class="font-mono text-grigio text-xs tracking-wide hover:text-fucsia transition-colors">@30posti.official</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     JS
+══════════════════════════════════════════ -->
+<script>
+// ─ Tabs ─
+function setTab(e, id) {
+  document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.tpanel').forEach(p => p.classList.remove('on'));
+  e.currentTarget.classList.add('on');
+  document.getElementById('tp-' + id).classList.add('on');
+}
+
+// ─ Mobile nav ─
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-drawer').classList.toggle('hidden');
+});
+function closeNav() { document.getElementById('nav-drawer').classList.add('hidden'); }
+
+// ─ Scroll reveal ─
+const revObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('on'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rev,.revl,.revr').forEach(el => revObserver.observe(el));
+
+// ─ Map pins ─
+const tip = document.getElementById('map-tip');
+document.querySelectorAll('.pin-g').forEach(pin => {
+  function showTip() {
+    document.getElementById('tip-c').textContent = pin.dataset.c;
+    document.getElementById('tip-p').textContent = pin.dataset.p;
+    document.getElementById('tip-v').textContent = 'Vitigno: ' + pin.dataset.v;
+    const rect = pin.closest('svg').getBoundingClientRect();
+    const pr   = pin.querySelector('circle').getBoundingClientRect();
+    tip.style.display = 'block';
+    tip.style.top  = (pr.top - rect.top - tip.offsetHeight - 10) + 'px';
+    tip.style.left = Math.min(pr.left - rect.left - 60, 60) + 'px';
+  }
+  pin.addEventListener('mouseenter', showTip);
+  pin.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  pin.addEventListener('click', () => {
+    tip.style.display === 'none' ? showTip() : (tip.style.display = 'none');
+  });
+});
+
+// ─ Smooth scroll ─
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+</script>
+</body>
+</html>
